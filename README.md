@@ -1,6 +1,6 @@
-# Sistema de Cajero Automático en C
+# Sistema de Cajero Automático en C++
 
-Este proyecto simula el funcionamiento básico de un cajero automático utilizando lenguaje C.
+Este proyecto simula el funcionamiento básico de un cajero automático utilizando C++ y almacenamiento de datos en archivos de texto.
 
 ## Funcionalidades
 
@@ -12,14 +12,23 @@ Este proyecto simula el funcionamiento básico de un cajero automático utilizan
 
 ## Tecnologías utilizadas
 
-- Lenguaje C
-- Manejo de archivos
+- C++
+- Manejo de archivos (.txt)
+- Programación estructurada
 
 ## Cómo ejecutar
 
-1. Compilar el archivo .c
+1. Compilar el archivo .cpp
 2. Ejecutar el programa en consola
-3. Asegurarse de que los archivos .txt estén en la misma carpeta
+3. Asegurarse de que el archivo `usuarios.txt` esté en la misma carpeta
+
+## Ejemplo de uso
+
+El sistema permite al usuario iniciar sesión y realizar operaciones mediante un menú interactivo en consola, simulando el comportamiento de un cajero automático real.
+
+## Nota
+
+El archivo `usuarios.txt` contiene datos de ejemplo para pruebas.
 
 ## Objetivo
 
