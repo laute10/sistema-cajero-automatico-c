@@ -1,4 +1,4 @@
-#include <stdio.h>      // Para entrada/salida estándar
+#include <stdio.h>      // Para entrada/salida estÃ¡ndar
 #include <stdbool.h>    // Para usar tipo bool
 #include <string.h>     // Para manejo de cadenas (strcmp, strcpy, strlen)
 #include <ctype.h>      // Para funciones de caracteres (isdigit, isupper, etc)
@@ -7,9 +7,9 @@
 #include <unistd.h>     // Para sleep()
 
 #define CLAVE_CIFRADO 42   // Constante usada para cifrar y descifrar PIN con XOR
-#define MAX_USUARIOS 100   // Máximo de usuarios en el sistema
+#define MAX_USUARIOS 100   // MÃ¡ximo de usuarios en el sistema
 
-// Declaración de funciones que se usan en el programa
+// DeclaraciÃ³n de funciones que se usan en el programa
 void cifrarPIN(char pin[]);
 void guardarDatos(const char* nombreArchivo, char ids[][20], char pins[][10], float saldos[], char nombres[][30], char apellidos[][30], int cantidad);
 void cargarDatos(const char* nombreArchivo, char ids[][20], char pins[][10], float saldos[], char nombres[][30], char apellidos[][30], int* cantidad);
@@ -27,7 +27,7 @@ bool esNumeroValido(char texto[]);
 
 int main()
 {
-	int MaxUsuarios = 3;  // Número fijo de usuarios en esta ejercitación (puede cambiar)
+	int MaxUsuarios = 3;  // NÃºmero fijo de usuarios en esta ejercitaciÃ³n (puede cambiar)
 
 	// Arrays para almacenar datos de usuarios (simula base de datos)
 	char nombres[MaxUsuarios][30];
@@ -37,7 +37,7 @@ int main()
 	float saldos[MaxUsuarios];
 	int intentos[MaxUsuarios] = {0, 0, 0};        // Contador de intentos de PIN fallidos
 	bool bloqueados[MaxUsuarios] = {false, false, false};  // Usuarios bloqueados
-	time_t bloqueosTiempo[MaxUsuarios] = {0};     // Tiempo en que se bloqueó cada usuario
+	time_t bloqueosTiempo[MaxUsuarios] = {0};     // Tiempo en que se bloqueÃ³ cada usuario
 	int cantidadUsuarios = 0;                      // Cantidad real de usuarios cargados
 
 	char id[20];   // Para pedir ID al usuario
@@ -46,19 +46,19 @@ int main()
 	// Cargar datos guardados de archivo
 	cargarDatos("usuarios.txt", ids, pins, saldos, nombres, apellidos, &cantidadUsuarios);
 
-	// Bucle principal del programa: inicia sesión y luego pregunta si se cierra o no
+	// Bucle principal del programa: inicia sesiÃ³n y luego pregunta si se cierra o no
 	while (1) {
 		inicioSesion(ids, pins, intentos, bloqueados, bloqueosTiempo, id, pin, MaxUsuarios, nombres, apellidos, saldos);
 
 		// Preguntar si quiere cerrar el programa
 		char opcion;
 		do {
-			printf("\n¿Desea cerrar el programa? (s/n): ");
+			printf("\nÂ¿Desea cerrar el programa? (s/n): ");
 			scanf(" %c", &opcion);
-			opcion = tolower(opcion);  // convertir a minúscula para facilitar comparación
+			opcion = tolower(opcion);  // convertir a minÃºscula para facilitar comparaciÃ³n
 
 			if (opcion != 's' && opcion != 'n') {
-				printf("Opción inválida. Por favor ingrese 's' para salir o 'n' para continuar.\n");
+				printf("OpciÃ³n invÃ¡lida. Por favor ingrese 's' para salir o 'n' para continuar.\n");
 			}
 		} while (opcion != 's' && opcion != 'n');
 
@@ -78,13 +78,13 @@ void inicioSesion(char ids[][20], char pins[][10], int intentos[], bool bloquead
 
     printf("----- INICIO DE SESION -----\n");
 
-    // Permite hasta 3 intentos para ingresar un ID válido y que exista en la base de datos
+    // Permite hasta 3 intentos para ingresar un ID vÃ¡lido y que exista en la base de datos
     while (intentosID < 3) {
-        printf("Ingrese ID (solo números, mínimo 6 digitos): ");
+        printf("Ingrese ID (solo nÃºmeros, mÃ­nimo 6 digitos): ");
         scanf("%19s", id);
 
         if (!esIDValido(id)) {   // Verifica formato correcto del ID
-            printf("ID inválido. Debe contener solo números y tener al menos 6 digitos.\n");
+            printf("ID invÃ¡lido. Debe contener solo nÃºmeros y tener al menos 6 digitos.\n");
             intentosID++;
             continue;  // Volver a pedir ID
         }
@@ -125,7 +125,7 @@ void inicioSesion(char ids[][20], char pins[][10], int intentos[], bool bloquead
 
 		}
 
-        // Si ID válido y usuario encontrado, salir del ciclo para pedir PIN
+        // Si ID vÃ¡lido y usuario encontrado, salir del ciclo para pedir PIN
         break;
     }
 
@@ -134,7 +134,7 @@ void inicioSesion(char ids[][20], char pins[][10], int intentos[], bool bloquead
         return;
     }
 
-    // Mostrar nombre del usuario al iniciar sesión correctamente con ID
+    // Mostrar nombre del usuario al iniciar sesiÃ³n correctamente con ID
     printf("Bienvenido %s %s\n", nombres[encontrado], apellidos[encontrado]);
 
     // Permite hasta 3 intentos para ingresar el PIN correcto
@@ -146,7 +146,7 @@ void inicioSesion(char ids[][20], char pins[][10], int intentos[], bool bloquead
         if (strcmp(pin, pins[encontrado]) == 0) {
             intentos[encontrado] = 0; // Reinicia contador de intentos fallidos
             printf("Acceso concedido.\n");
-            mostrarMenu(ids, pins, saldos, encontrado);  // Muestra menú principal
+            mostrarMenu(ids, pins, saldos, encontrado);  // Muestra menÃº principal
             return;
         } else {
             intentos[encontrado]++;
@@ -163,7 +163,7 @@ void inicioSesion(char ids[][20], char pins[][10], int intentos[], bool bloquead
     }
 
     // Si no pudo autenticarse, muestra mensaje
-    printf("No se pudo autenticar. Intente más tarde.\n");
+    printf("No se pudo autenticar. Intente mÃ¡s tarde.\n");
 }
 
 
@@ -180,7 +180,7 @@ void mostrarMenu(char ids[][20], char pins[][10], float saldos[], int indiceUsua
         printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
 
-        // Ejecuta la función según la opción elegida
+        // Ejecuta la funciÃ³n segÃºn la opciÃ³n elegida
         switch(opcion) {
             case 1:
             	consultarSaldo(saldos, indiceUsuario); 
@@ -223,16 +223,16 @@ void retirarDinero(float saldos[], int indiceUsuario)
 	printf("Ingrese el monto a retirar: $");
 	scanf("%s", input);
 
-	if (!esNumeroValido(input))  // Validar que sea número válido (float positivo)
+	if (!esNumeroValido(input))  // Validar que sea nÃºmero vÃ¡lido (float positivo)
 	{
-    	printf("Entrada inválida. Solo se permiten números.\n");
+    	printf("Entrada invÃ¡lida. Solo se permiten nÃºmeros.\n");
     	return;
 	}
 
-	monto = atof(input);  // Convierte texto a número flotante
+	monto = atof(input);  // Convierte texto a nÃºmero flotante
 
     if (monto <= 0) {
-        printf("Monto inválido.\n");
+        printf("Monto invÃ¡lido.\n");
         return;
     }
 
@@ -240,11 +240,11 @@ void retirarDinero(float saldos[], int indiceUsuario)
         printf("Saldo insuficiente. Su saldo actual es $%.2f\n", saldos[indiceUsuario]);
     } else {
     	
-    	printf("¿Confirmar la operación? (s/n): ");
+    	printf("Â¿Confirmar la operaciÃ³n? (s/n): ");
 		scanf(" %c", &confirmar);
 		if (confirmar != 's' && confirmar != 'S') 
 		{
-		    printf("Operación cancelada.\n");
+		    printf("OperaciÃ³n cancelada.\n");
 		    return;
 		}
 
@@ -262,29 +262,29 @@ void depositarDinero(float saldos[], int indiceUsuario)
 	printf("Ingrese el monto a depositar: $");
 	scanf("%s", input);
 
-	if (!esNumeroValido(input))  // Validar que sea número válido (float positivo)
+	if (!esNumeroValido(input))  // Validar que sea nÃºmero vÃ¡lido (float positivo)
 	{
-	    printf("Entrada inválida. Solo se permiten números.\n");
+	    printf("Entrada invÃ¡lida. Solo se permiten nÃºmeros.\n");
 	    return;
 	}
 
-	monto = atof(input);  // Convierte texto a número flotante
+	monto = atof(input);  // Convierte texto a nÃºmero flotante
 
     if (monto <= 0) {
-        printf("Monto inválido.\n");
+        printf("Monto invÃ¡lido.\n");
         return;
     }
     
-    printf("¿Confirmar la operación? (s/n): ");
+    printf("Â¿Confirmar la operaciÃ³n? (s/n): ");
 	scanf(" %c", &confirmar);
 	if (confirmar != 's' && confirmar != 'S') 
 	{
-	    printf("? Operación cancelada.\n");
+	    printf("? OperaciÃ³n cancelada.\n");
 	    return;
 	}
 
     saldos[indiceUsuario] = saldos[indiceUsuario] + monto;
-    printf("Depósito exitoso. Nuevo saldo: $%.2f\n", saldos[indiceUsuario]);
+    printf("DepÃ³sito exitoso. Nuevo saldo: $%.2f\n", saldos[indiceUsuario]);
 }
 
 void cambiarPIN(char pins[][10], int indiceUsuario) 
@@ -302,12 +302,12 @@ void cambiarPIN(char pins[][10], int indiceUsuario)
         return;
     }
 
-    printf("Ingrese el nuevo PIN (mínimo 6 caracteres, al menos una mayúscula, una minúscula y un número): ");
+    printf("Ingrese el nuevo PIN (mÃ­nimo 6 caracteres, al menos una mayÃºscula, una minÃºscula y un nÃºmero): ");
     scanf("%s", nuevoPin);
 
     // Valida formato del nuevo PIN
     if (!esPINValido(nuevoPin)) {
-        printf("PIN inválido. Debe tener al menos 6 caracteres, incluir mayúsculas, minúsculas, números y no tener símbolos.\n");
+        printf("PIN invÃ¡lido. Debe tener al menos 6 caracteres, incluir mayÃºsculas, minÃºsculas, nÃºmeros y no tener sÃ­mbolos.\n");
         return;
     }
 
@@ -317,11 +317,11 @@ void cambiarPIN(char pins[][10], int indiceUsuario)
         return;
     }
 
-    // Confirmación antes de cambiar el PIN
-    printf("¿Confirmar la operación? (s/n): ");
+    // ConfirmaciÃ³n antes de cambiar el PIN
+    printf("Â¿Confirmar la operaciÃ³n? (s/n): ");
     scanf(" %c", &confirmar);
     if (confirmar != 's' && confirmar != 'S') {
-        printf("Operación cancelada.\n");
+        printf("OperaciÃ³n cancelada.\n");
         return;
     }
 
@@ -331,21 +331,21 @@ void cambiarPIN(char pins[][10], int indiceUsuario)
 }
 
 
-// Función que valida si el ID contiene solo números y tiene al menos 6 caracteres
+// FunciÃ³n que valida si el ID contiene solo nÃºmeros y tiene al menos 6 caracteres
 bool esIDValido(char id[]) {
     int largo = strlen(id);
     if (largo < 6) return false;
 
     for (int i = 0; i < largo; i++) {
         if (!isdigit(id[i])) {
-            return false; // Si algún carácter no es dígito, es inválido
+            return false; // Si algÃºn carÃ¡cter no es dÃ­gito, es invÃ¡lido
         }
     }
     return true;
 }
 
-// Función que valida si el PIN cumple con las condiciones:
-// mínimo 6 caracteres, al menos una mayúscula, una minúscula, un número, y sin símbolos
+// FunciÃ³n que valida si el PIN cumple con las condiciones:
+// mÃ­nimo 6 caracteres, al menos una mayÃºscula, una minÃºscula, un nÃºmero, y sin sÃ­mbolos
 bool esPINValido(char pin[]) {
     int largo = strlen(pin);
     if (largo < 6) return false;
@@ -364,15 +364,15 @@ bool esPINValido(char pin[]) {
         } else if (isdigit(c)) {
             tieneNumero = true;
         } else {
-            return false; // Si hay algún símbolo o carácter inválido
+            return false; // Si hay algÃºn sÃ­mbolo o carÃ¡cter invÃ¡lido
         }
     }
 
-    // Devuelve true solo si tiene mayúscula, minúscula y número
+    // Devuelve true solo si tiene mayÃºscula, minÃºscula y nÃºmero
     return tieneMayus && tieneMinus && tieneNumero;
 }
 
-// Función que valida que una cadena sea un número válido (float positivo con máximo un punto decimal)
+// FunciÃ³n que valida que una cadena sea un nÃºmero vÃ¡lido (float positivo con mÃ¡ximo un punto decimal)
 bool esNumeroValido(char texto[]) {
     int punto = 0;
 
@@ -381,16 +381,16 @@ bool esNumeroValido(char texto[]) {
     for (int i = 0; texto[i] != '\0'; i++) {
         if (texto[i] == '.') {
             punto++;
-            if (punto > 1) return false;  // No más de un punto decimal
+            if (punto > 1) return false;  // No mÃ¡s de un punto decimal
         } else if (!isdigit(texto[i])) {
-            return false; // Si no es dígito ni punto, inválido
+            return false; // Si no es dÃ­gito ni punto, invÃ¡lido
         }
     }
 
     return true;
 }
 
-// Función para cifrar y descifrar PIN usando XOR con clave
+// FunciÃ³n para cifrar y descifrar PIN usando XOR con clave
 void cifrarPIN(char pin[]) {
     for (int i = 0; pin[i] != '\0'; i++) {
         pin[i] = pin[i] ^ CLAVE_CIFRADO;
@@ -414,12 +414,12 @@ void guardarDatos(const char* nombreArchivo,
         cifrarPIN(pinCifrado);           // Lo cifra para guardar
 
         char pinHex[20] = {0};
-        // Convierte cada byte cifrado a su representación hexadecimal
+        // Convierte cada byte cifrado a su representaciÃ³n hexadecimal
         for (int j = 0; pinCifrado[j] != '\0'; j++) {
             sprintf(pinHex + j*2, "%02X", (unsigned char)pinCifrado[j]);
         }
 
-        // Guarda línea con ID, PIN cifrado en hex, saldo, nombre y apellido
+        // Guarda lÃ­nea con ID, PIN cifrado en hex, saldo, nombre y apellido
         fprintf(archivo, "%s %s %.2f %s %s\n",
                 ids[i], pinHex, saldos[i], nombres[i], apellidos[i]);
     }
@@ -441,7 +441,7 @@ void cargarDatos(const char* nombreArchivo,
     int i = 0;
     while (i < MAX_USUARIOS) {
         char pinHex[20];
-        // Lee una línea con formato esperado
+        // Lee una lÃ­nea con formato esperado
         int leidos = fscanf(archivo, "%19s %19s %f %29s %29s",
                             ids[i], pinHex, &saldos[i], nombres[i], apellidos[i]);
         if (leidos != 5) break;
